@@ -15,7 +15,7 @@ class ActiveUserMiddleware {
      */
     public function handle( Request $request, Closure $next ): Response {
         $user = $request->user();
-        if ( $user && $user !== User::STATUS_ACTIVE ) {
+        if ( $user && $user->status !== User::STATUS_ACTIVE ) {
             abort( 403, 'Your account is not active. Please contact support.' );
         }
         return $next( $request );
